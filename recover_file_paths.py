@@ -74,9 +74,9 @@ def compare_paths( root_a, root_b ):
 	#The output will be two files, in_test1_not_in_test2.pkl and in_test2_not_in_test1.pkl
 
 	#Reading in files
-	root_a = pd.read_pickle( 'root_a' )
+	root_a = pd.read_pickle( root_a )
 	root_a = list( root_a.path )
-	root_b = pd.read_pickle( 'root_b' )
+	root_b = pd.read_pickle( root_b )
 	root_b = list( root_b.path )
 
 	#Processing differences
