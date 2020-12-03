@@ -25,32 +25,32 @@ def recover_paths( root, save_path, save_name ):
 	#Result will be three files, test_results.pkl, paths_test_results.pkl and err_test_results.pkl which are saved in 'Users/Test_User/Downloads'
 
 	#Initializing lists
-    paths_list = list()
-    file_path_list = list()
-    file_size_list = list()
-    err_lists = list()
+	paths_list = list()
+	file_path_list = list()
+	file_size_list = list()
+	err_lists = list()
 
-    #Traversing all paths
-    for path, subdirs, files in os.walk(root):
-        for name in files:
-            try: #Attempting to compute file size and save path/size
-                temp  = os.path.join(path, name)
-                paths_list.append( temp )
-                file_size_list.append( os.stat( temp ).st_size  )
-                file_path_list.append( temp )
-            except: #Tracking fails
-                err_lists.append( os.path.join(path, name) )
+	#Traversing all paths
+	for path, subdirs, files in os.walk(root):
+	for name in files:
+	    try: #Attempting to compute file size and save path/size
+		temp  = os.path.join(path, name)
+		paths_list.append( temp )
+		file_size_list.append( os.stat( temp ).st_size  )
+		file_path_list.append( temp )
+	    except: #Tracking fails
+		err_lists.append( os.path.join(path, name) )
 
 
-    #Saving results as dataframes stores as .pkl
-    df = pd.DataFrame( { 'path':file_path_list, 'size':file_size_list } )
-    df.to_pickle( save_path + '/' + save_name  +'.pkl' )
+	#Saving results as dataframes stores as .pkl
+	df = pd.DataFrame( { 'path':file_path_list, 'size':file_size_list } )
+	df.to_pickle( save_path + '/' + save_name  +'.pkl' )
 
-    names = pd.DataFrame( { 'path':paths_list } )
-    df.to_pickle( save_path + '/paths_' + save_name  +'.pkl' )
+	names = pd.DataFrame( { 'path':paths_list } )
+	df.to_pickle( save_path + '/paths_' + save_name  +'.pkl' )
 
-    err = pd.DataFrame( { 'path':err_lists } )
-    err.to_pickle( save_path + '/err_' + save_name  +'.pkl' )
+	err = pd.DataFrame( { 'path':err_lists } )
+	err.to_pickle( save_path + '/err_' + save_name  +'.pkl' )
 
 
 
